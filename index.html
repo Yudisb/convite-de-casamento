@@ -20,7 +20,7 @@
 
         body {
             font-family: 'Georgia', serif;
-            line-height: 1.5; /* Reduzi levemente para ficar mais compacto */
+            line-height: 1.5;
             color: var(--cor-texto);
             background-color: var(--cor-fundo);
             overflow-x: hidden;
@@ -124,7 +124,6 @@
         .spark { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: gold; opacity: 0; transform-origin: center; }
         @keyframes explode { 0% { transform: translate(0, 0) scale(1); opacity: 1; } 100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; } }
 
-        /* Configuração dos fogos (mantida igual) */
         .f1 { top: 20%; left: 20%; } .f1 .spark { background: #ff4d4d; animation: explode 1.5s ease-out infinite; animation-delay: 0.5s; }
         .f2 { top: 60%; left: 80%; } .f2 .spark { background: #ffaa00; animation: explode 1.5s ease-out infinite; animation-delay: 1.2s; }
         .f3 { top: 40%; left: 50%; } .f3 .spark { background: #fff; animation: explode 1.5s ease-out infinite; animation-delay: 2.5s; }
@@ -163,7 +162,7 @@
             margin: 20px 0; color: #555; background-color: #fff5f7; padding: 15px; border-radius: 0 10px 10px 0;
         }
 
-        /* --- CARROSSEL --- */
+        /* --- CARROSSEL (PC) --- */
         #fotos { background-color: var(--cor-cinza-claro); }
         .carousel-container {
             max-width: 450px; height: 550px; margin: auto; overflow: hidden;
@@ -189,9 +188,9 @@
         .btn { background-color: var(--cor-primaria); color: white; padding: 12px; border: none; width: 100%; font-size: 1rem; border-radius: 5px; cursor: pointer; margin-top: 10px; font-weight: bold; }
         footer { background: #222; color: #ccc; padding: 30px 0 60px 0; text-align: center; font-size: 0.9rem; }
 
-        /* --- INTEGRAÇÃO MOBILE PERFEITA (Aqui está a correção do vídeo) --- */
+        /* --- INTEGRAÇÃO MOBILE (CORREÇÃO DE PROPORÇÃO) --- */
         @media (max-width: 768px) {
-            /* Navbar mais compacta */
+            /* Navbar */
             header { padding: 0.5rem 0; }
             .navbar { flex-direction: column; gap: 5px; }
             .logo { font-size: 1.6rem; margin-bottom: 5px; }
@@ -199,22 +198,13 @@
             .nav-links a { margin: 0; font-size: 0.75rem; padding: 5px 8px; }
             .btn-rsvp-nav { padding: 6px 12px; }
             
-            /* Topo (Hero) Proporcional */
-            #hero { 
-                height: auto; 
-                min-height: 80vh; /* Não força ocupar tela toda se não tiver conteúdo */
-                padding: 60px 15px; 
-            }
-            .hero-content h1 { font-size: 2.8rem; } /* Fonte bem menor para não quebrar */
+            /* Hero */
+            #hero { height: auto; min-height: 80vh; padding: 60px 15px; }
+            .hero-content h1 { font-size: 2.8rem; }
             .hero-content p { font-size: 1rem; padding: 0 10px; }
-            #contador { 
-                font-size: 1rem; /* Contador menor e delicado */
-                padding: 8px 20px; 
-                margin-top: 10px;
-                width: auto; 
-            }
+            #contador { font-size: 1rem; padding: 8px 20px; margin-top: 10px; width: auto; }
 
-            /* Seções mais compactas */
+            /* Seções Gerais */
             .section { padding: 40px 0; }
             .container { padding: 0 15px; }
 
@@ -222,20 +212,19 @@
             .historia-container { flex-direction: column; gap: 20px; }
             .citacao { margin: 15px 0; font-size: 0.95rem; }
 
-            /* Carrossel Ajustado */
+            /* --- CORREÇÃO DO CARROSSEL NO CELULAR --- */
             .carousel-container { 
-                width: 100%; 
-                max-width: 320px; /* Limita a largura */
-                height: 320px; /* Quadrado perfeito para não cortar rostos */
+                width: 90%; /* Usa quase toda a largura */
+                max-width: 400px; 
+                /* AQUI ESTÁ O SEGREDO: Altura maior para proporção retrato, igual ao PC */
+                height: 450px; 
             } 
             
-            /* Títulos e Textos */
+            /* Restante dos ajustes */
             h2 { font-size: 2rem; margin-bottom: 15px; }
             .texto-destaque-jantar { font-size: 1.2rem; margin-bottom: 20px; }
             .info-box { padding: 20px; }
             .preco-destaque { font-size: 1.4rem; }
-            
-            /* Formulário */
             .form-container { padding: 20px; }
         }
     </style>
@@ -266,7 +255,8 @@
         <div class="hero-content container">
             <h1>Yudi & Ana</h1>
             <p>Vamos celebrar o nosso amor!</p>
-            <p>11 de Setembro de 2026</p> <div id="contador">Calculando...</div>
+            <p>11 de Setembro de 2026</p>
+            <div id="contador">Calculando...</div>
         </div>
     </section>
 
