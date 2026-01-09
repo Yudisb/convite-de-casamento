@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casamento Yudi & Ana</title>
+    <style>
+        /* --- PALETA DE CORES --- */
+        :root {
+            --cor-primaria: #800020; /* Vinho / Marsala */
+            --cor-secundaria: #b3002d; /* Vermelho mais vivo para os fogos */
+            --cor-fundo: #ffffff;
+            --cor-texto: #333333;
+            --cor-cinza-claro: #f4f4f4;
+        }
+
+        /* --- RESET GERAL --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: var(--cor-texto);
+            background-color: var(--cor-fundo);
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: var(--cor-primaria); transition: 0.3s; }
+        a:hover { color: #500014; } 
+        img { max-width: 100%; display: block; }
+
+        /* Container centralizado */
+        .container { width: 90%; max-width: 1100px; margin: auto; padding: 0 20px; }
+        .section { padding: 60px 0; }
+        .text-center { text-align: center; }
+
+        h2 { font-size: 2.5rem; color: var(--cor-primaria); margin-bottom: 20px; text-align: center; }
+
+        /* --- HEADER --- */
+        header {
+            background: var(--cor-fundo);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            width: 100%;
+        }
+
+        .navbar { 
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important; 
+        }
+
+        .logo { 
+            font-size: 2rem; 
+            color: var(--cor-primaria); 
+            font-family: 'cursive'; 
+            font-weight: bold; 
+        }
+        
+        .nav-links { display: flex; align-items: center; }
+
+        .nav-links a { 
+            margin-left: 15px; 
+            color: var(--cor-texto); 
+            font-weight: bold; 
+            font-size: 0.9rem; 
+            text-transform: uppercase; 
+            transition: all 0.3s ease; 
+        }
+
+        .nav-links a:hover { color: var(--cor-primaria); }
+
+        .btn-rsvp-nav { 
+            background-color: var(--cor-primaria); 
+            color: white !important; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            transition: all 0.3s ease;
+        }
+        
+        .btn-rsvp-nav:hover {
+            background-color: #500014;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(128, 0, 32, 0.3);
+        }
+
+        /* --- HERO (FUNDO DE FESTA + EFEITOS) --- */
+        #hero {
+            height: 90vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            /* O segredo: tudo que sair desse quadrado será cortado */
+            overflow: hidden; 
+
+            /* Fundo Degradê Animado */
+            background: linear-gradient(-45deg, #5c0017, #9a0b2e, #ff4d4d, #ffaa00, #9a0b2e, #5c0017);
+            background-size: 400% 400%;
+            animation: fireworksBG 10s ease infinite;
+        }
+
+        @keyframes fireworksBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* EFEITO 1: CORAÇÕES CAINDO */
+        .heart {
+            position: absolute;
+            top: -50px; /* Começam fora da tela, em cima */
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.6); /* Corações brancos translúcidos */
+            transform: rotate(45deg);
+            animation: fall 5s linear infinite;
+            z-index: 1;
+        }
+        /* Cria a forma do coração usando pseudo-elementos */
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: inherit;
+            border-radius: 50%;
+        }
+        .heart::before { top: -10px; left: 0; }
+        .heart::after { top: 0; left: -10px; }
+
+        @keyframes fall {
+            to {
+                top: 100vh; /* Caem até o final da tela */
+                transform: rotate(45deg) translateX(20px); /* Um leve movimento lateral */
+                opacity: 0; /* Somem no final */
+            }
+        }
+        
+        /* Atrasos para os corações não caírem todos juntos */
+        .h1 { left: 10%; animation-delay: 0s; animation-duration: 6s; }
+        .h2 { left: 30%; animation-delay: 2s; animation-duration: 4s; }
+        .h3 { left: 50%; animation-delay: 4s; animation-duration: 7s; }
+        .h4 { left: 70%; animation-delay: 1s; animation-duration: 5s; }
+        .h5 { left: 90%; animation-delay: 3s; animation-duration: 8s; }
+
+
+        /* EFEITO 2: FOGOS DE ARTIFÍCIO (EXPLOSÃO REAL) */
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            z-index: 1;
+        }
+
+        .spark {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: gold;
+            opacity: 0;
+            transform-origin: center;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Fogo 1 (Vermelho) */
+        .f1 { top: 20%; left: 20%; }
+        .f1 .spark {
+            background: #ff4d4d;
+            animation: explode 1.5s ease-out infinite;
+            animation-delay: 0.5s;
+        }
+
+        /* Fogo 2 (Laranja) */
+        .f2 { top: 60%; left: 80%; }
+        .f2 .spark {
+            background: #ffaa00;
+            animation: explode 1.5s ease-out infinite;
+            animation-delay: 1.2s;
+        }
+
+        /* Fogo 3 (Branco) */
+        .f3 { top: 40%; left: 50%; }
+        .f3 .spark {
+            background: #fff;
+            animation: explode 1.5s ease-out infinite;
+            animation-delay: 2.5s;
+        }
+
+        /* Fogo 4 (Vinho) */
+        .f4 { top: 80%; left: 10%; }
+        .f4 .spark {
+            background: #9a0b2e;
+            animation: explode 1.5s ease-out infinite;
+            animation-delay: 3.1s;
+        }
+
+        /* Fogo 5 (Dourado) */
+        .f5 { top: 15%; left: 70%; }
+        .f5 .spark {
+            background: gold;
+            animation: explode 1.5s ease-out infinite;
+            animation-delay: 0.1s;
+        }
+
+
+        /* CONTEÚDO DO HERO (Fica na frente dos efeitos) */
+        .hero-content { 
+            position: relative; 
+            z-index: 2;
+            text-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        .hero-content h1 { 
+            font-size: 4.5rem; 
+            font-family: 'cursive'; 
+            margin-bottom: 10px;
+            animation: batimento 1.5s infinite;
+        }
+
+        @keyframes batimento {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .hero-content p { 
+            font-size: 1.3rem; 
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        #contador { 
+            margin-top: 25px; 
+            font-size: 1.6rem;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            color: white; 
+            padding: 12px 30px; 
+            border-radius: 50px; 
+            display: inline-block; 
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+        }
+
+        /* --- HISTÓRIA --- */
+        #historia { background-color: var(--cor-fundo); }
+        .historia-container { display: flex; align-items: center; gap: 40px; }
+        .historia-img { flex: 1; }
+        .historia-img img { border-radius: 10px; box-shadow: 0 10px 20px rgba(128,0,32,0.1); }
+        .historia-texto { flex: 1; }
+        .citacao { 
+            font-style: italic; 
+            border-left: 4px solid var(--cor-primaria); 
+            padding-left: 15px; 
+            margin: 25px 0; 
+            color: #555; 
+            background-color: #fff5f7; /* Fundo rosinha bem claro */
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        /* --- CARROSSEL --- */
+        #fotos { background-color: var(--cor-cinza-claro); }
+        
+        .carousel-container {
+            max-width: 450px; 
+            height: 550px;    
+            margin: auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            background-color: #fff;
+            position: relative; 
+        }
+
+        .carousel-slide { 
+            display: flex; 
+            height: 100%; 
+            width: 100%;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+            object-fit: cover; 
+            object-position: center top; 
+        }
+        
+        .botoes-carrossel { display: flex; justify-content: center; gap: 60px; margin-top: 20px; }
+        .carousel-btn { background: none; border: none; cursor: pointer; transition: transform 0.3s ease; padding: 10px; }
+        .carousel-btn:hover { transform: scale(1.3); }
+        .carousel-btn:hover svg { fill: var(--cor-primaria) !important; }
+
+        /* --- INFO --- */
+        .texto-destaque-jantar {
+            font-size: 1.8rem;
+            color: var(--cor-primaria);
+            font-weight: bold;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .info-box { 
+            background: #fff; 
+            padding: 40px; 
+            border: 2px solid var(--cor-primaria); 
+            border-radius: 10px; 
+            max-width: 700px; 
+            margin: 0 auto; 
+            box-shadow: 0 10px 25px rgba(128,0,32,0.1); 
+        }
+        .preco-destaque { font-size: 1.8rem; color: var(--cor-primaria); font-weight: bold; display: block; margin: 20px 0; }
+
+        /* --- RSVP --- */
+        #rsvp { 
+            background: linear-gradient(135deg, var(--cor-primaria), #800000);
+            color: white; 
+            padding: 80px 0; 
+        }
+        #rsvp h2 { color: white; }
+        .form-container { background: #fff; padding: 40px; border-radius: 10px; max-width: 600px; margin: auto; color: #333; box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; font-weight: bold; color: var(--cor-primaria); margin-bottom: 5px; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; font-family: inherit; }
+        
+        .btn { 
+            background-color: var(--cor-primaria); 
+            color: white; 
+            padding: 15px; 
+            border: none; 
+            width: 100%; 
+            font-size: 1.1rem; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            margin-top: 10px; 
+            font-weight: bold;
+            transition: 0.3s; 
+        }
+        .btn:hover { background-color: #b3002d; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        
+        footer { background: #222; color: #ccc; padding: 40px 0 80px 0; text-align: center; }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 15px; }
+            .nav-links { display: flex; flex-direction: column; gap: 10px; }
+            .nav-links a { margin: 0; }
+            .hero-content h1 { font-size: 3.5rem; }
+            .historia-container { flex-direction: column; }
+            .carousel-container { max-width: 100%; height: 450px; } 
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container navbar">
+            <div class="logo">Yudi & Ana</div>
+            <nav class="nav-links">
+                <a href="#historia">Nossa História</a>
+                <a href="#fotos">Fotos</a>
+                <a href="#informacoes">Jantar & Adesão</a>
+                <a href="#rsvp" class="btn-rsvp-nav">CONFIRMAÇÃO</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="heart h1"></div>
+        <div class="heart h2"></div>
+        <div class="heart h3"></div>
+        <div class="heart h4"></div>
+        <div class="heart h5"></div>
+
+        <div class="firework f1">
+            <div class="spark" style="--tx: 40px; --ty: -60px; transform: rotate(15deg);"></div>
+            <div class="spark" style="--tx: -50px; --ty: 50px; transform: rotate(45deg);"></div>
+            <div class="spark" style="--tx: 60px; --ty: 40px; transform: rotate(75deg);"></div>
+            <div class="spark" style="--tx: -40px; --ty: -50px; transform: rotate(105deg);"></div>
+            <div class="spark" style="--tx: 50px; --ty: -40px; transform: rotate(135deg);"></div>
+            <div class="spark" style="--tx: -60px; --ty: 60px; transform: rotate(165deg);"></div>
+            <div class="spark" style="--tx: 30px; --ty: 70px; transform: rotate(195deg);"></div>
+            <div class="spark" style="--tx: -70px; --ty: -30px; transform: rotate(225deg);"></div>
+        </div>
+        <div class="firework f2">
+            <div class="spark" style="--tx: 50px; --ty: -50px; transform: rotate(25deg);"></div>
+            <div class="spark" style="--tx: -60px; --ty: 60px; transform: rotate(55deg);"></div>
+            <div class="spark" style="--tx: 70px; --ty: 30px; transform: rotate(85deg);"></div>
+            <div class="spark" style="--tx: -50px; --ty: -60px; transform: rotate(115deg);"></div>
+            <div class="spark" style="--tx: 40px; --ty: -30px; transform: rotate(145deg);"></div>
+            <div class="spark" style="--tx: -40px; --ty: 70px; transform: rotate(175deg);"></div>
+            <div class="spark" style="--tx: 60px; --ty: 50px; transform: rotate(205deg);"></div>
+            <div class="spark" style="--tx: -70px; --ty: -40px; transform: rotate(235deg);"></div>
+        </div>
+        <div class="firework f3">
+            <div class="spark" style="--tx: 45px; --ty: -65px; transform: rotate(35deg);"></div>
+            <div class="spark" style="--tx: -55px; --ty: 45px; transform: rotate(65deg);"></div>
+            <div class="spark" style="--tx: 65px; --ty: 35px; transform: rotate(95deg);"></div>
+            <div class="spark" style="--tx: -45px; --ty: -55px; transform: rotate(125deg);"></div>
+            <div class="spark" style="--tx: 55px; --ty: -35px; transform: rotate(155deg);"></div>
+            <div class="spark" style="--tx: -65px; --ty: 55px; transform: rotate(185deg);"></div>
+            <div class="spark" style="--tx: 35px; --ty: 65px; transform: rotate(215deg);"></div>
+            <div class="spark" style="--tx: -75px; --ty: -45px; transform: rotate(245deg);"></div>
+        </div>
+        <div class="firework f4">
+            <div class="spark" style="--tx: 35px; --ty: -70px; transform: rotate(40deg);"></div>
+            <div class="spark" style="--tx: -45px; --ty: 55px; transform: rotate(70deg);"></div>
+            <div class="spark" style="--tx: 75px; --ty: 25px; transform: rotate(100deg);"></div>
+            <div class="spark" style="--tx: -55px; --ty: -45px; transform: rotate(130deg);"></div>
+            <div class="spark" style="--tx: 65px; --ty: -25px; transform: rotate(160deg);"></div>
+            <div class="spark" style="--tx: -75px; --ty: 65px; transform: rotate(190deg);"></div>
+            <div class="spark" style="--tx: 45px; --ty: 75px; transform: rotate(220deg);"></div>
+            <div class="spark" style="--tx: -65px; --ty: -35px; transform: rotate(250deg);"></div>
+        </div>
+        <div class="firework f5">
+            <div class="spark" style="--tx: 50px; --ty: -55px; transform: rotate(20deg);"></div>
+            <div class="spark" style="--tx: -60px; --ty: 65px; transform: rotate(50deg);"></div>
+            <div class="spark" style="--tx: 70px; --ty: 40px; transform: rotate(80deg);"></div>
+            <div class="spark" style="--tx: -50px; --ty: -65px; transform: rotate(110deg);"></div>
+            <div class="spark" style="--tx: 60px; --ty: -45px; transform: rotate(140deg);"></div>
+            <div class="spark" style="--tx: -70px; --ty: 70px; transform: rotate(170deg);"></div>
+            <div class="spark" style="--tx: 40px; --ty: 60px; transform: rotate(200deg);"></div>
+            <div class="spark" style="--tx: -80px; --ty: -50px; transform: rotate(230deg);"></div>
+        </div>
+
+
+        <div class="hero-content container">
+            <h1>Yudi & Ana</h1>
+            <p>Vamos celebrar o nosso amor!</p>
+            <p>11 de Setembro de 2026 • Preparem-se para uma noite inesquecível!</p>
+            <div id="contador">Calculando...</div>
+        </div>
+    </section>
+
+    <section id="historia" class="section">
+        <div class="container historia-container">
+            <div class="historia-img">
+                <img src="YUDIEANA.jpeg" alt="Yudi e Ana">
+            </div>
+            <div class="historia-texto">
+                <h2>Como tudo começou...</h2>
+                <div class="citacao">
+                    "Meus olhos já a seguiam antes mesmo das nossas palavras se cruzarem. Bastou um empurrão para a gente se falar e, desde aquele dia, meu coração encontrou um novo ritmo e eu entendi o que é ser feliz." -Yudi
+                </div>
+                <div class="citacao">
+                    "Ele me chamou atenção e comecei a prestar mais atenção nele e (com uma ajudinha da minha irmã) nos conhecemos. Não demorou muito pra eu perceber a pessoa incrível que o Yudi é, logo surgiu um relacionamento forte e cheio de amor." -Ana
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="fotos" class="section text-center">
+        <div class="container">
+            <h2>Nossos Momentos</h2>
+            <div class="carousel-container">
+                <div class="carousel-slide">
+                    <img src="FOTO 1.jpeg" alt="Foto 1">
+                    <img src="FOTO2.jpeg" alt="Foto 2">
+                    <img src="FOTO3.jpeg" alt="Foto 3">
+                    <img src="FOTO4.jpeg" alt="Foto 4">
+                    <img src="FOTO5.jpeg" alt="Foto 5">
+                </div>
+            </div>
+            <div class="botoes-carrossel">
+                <button class="carousel-btn" id="prevBtn">
+                    <svg style="transform: scaleX(-1);" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="var(--cor-primaria)" viewBox="0 0 16 16"><path d="M6.707 9h4.364c-.536 1.573 2.028 3.806 4.929-.5-2.9-4.306-5.465-2.073-4.929-.5H6.707L4.854 6.146a.5.5 0 1 0-.708.708L5.293 8h-.586L2.854 6.146a.5.5 0 1 0-.708.708L3.293 8h-.586L.854 6.146a.5.5 0 1 0-.708.708L1.793 8.5.146 10.146a.5.5 0 0 0 .708.708L2.707 9h.586l-1.147 1.146a.5.5 0 0 0 .708.708L4.707 9h.586l-1.147 1.146a.5.5 0 0 0 .708.708z"/></svg>
+                </button>
+                <button class="carousel-btn" id="nextBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="var(--cor-primaria)" viewBox="0 0 16 16"><path d="M6.707 9h4.364c-.536 1.573 2.028 3.806 4.929-.5-2.9-4.306-5.465-2.073-4.929-.5H6.707L4.854 6.146a.5.5 0 1 0-.708.708L5.293 8h-.586L2.854 6.146a.5.5 0 1 0-.708.708L3.293 8h-.586L.854 6.146a.5.5 0 1 0-.708.708L1.793 8.5.146 10.146a.5.5 0 0 0 .708.708L2.707 9h.586l-1.147 1.146a.5.5 0 0 0 .708.708L4.707 9h.586l-1.147 1.146a.5.5 0 0 0 .708.708z"/></svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="informacoes" class="section text-center">
+        <div class="container">
+            <h2>Jantar de Celebração</h2>
+            <p class="texto-destaque-jantar">Optamos por um formato intimista e moderno: o casamento por adesão.</p>
+            <div class="info-box">
+                <h3>Informações Importantes</h3>
+                <p>Local: <strong>Restaurante [Nome]</strong></p>
+                <p>Endereço: [Rua Tal, 123]</p>
+                <span class="preco-destaque">Valor da Adesão: R$ 140,00 por pessoa</span>
+                <ul style="list-style: none;">
+                    <li>🍽️ Buffet completo</li>
+                    <li>🥤 Bebidas não alcoólicas</li>
+                </ul>
+                <br>
+                <p><small>*Bebidas alcoólicas à parte.*</small></p>
+            </div>
+            
+            <p style="margin-top: 40px;">
+                A presença de vocês é o nosso maior presente. Como o jantar é por adesão, não será necessário nenhum outro presente (mas se quiserem nos abençoar ficaremos felizes 😃).
+                <br>
+                PIX: (91) 98728-3898 🦍
+            </p>
+        </div>
+    </section>
+
+    <section id="rsvp">
+        <div class="container text-center">
+            <h2>Confirme sua Presença</h2>
+            <p>Preencha abaixo para organizarmos tudo com carinho.</p>
+            <br>
+            <div class="form-container">
+                <form action="https://formspree.io/f/xbdlnboa" method="POST">
+                    
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" name="nome" required placeholder="Ex: Yudi Tamashiro">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Telefone para contato</label>
+                        <input type="tel" name="telefone" required placeholder="(DD) 99999-9999">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Você irá ao casamento?</label>
+                        <select name="presenca" required>
+                            <option value="">Selecione...</option>
+                            <option value="Sim">Sim, com certeza!🥰</option>
+                            <option value="Nao">Infelizmente não poderei ir😔</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Acompanhantes</label>
+                        <textarea name="acompanhantes" rows="3" placeholder="Nome de quem vai com você"></textarea>
+                    </div>
+                    <button type="submit" class="btn">ENVIAR CONFIRMAÇÃO</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Feito com ❤️ pelos noivos Yudi & Ana</p>
+            <p>#CasamentoYudiAna2026</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- SCRIPT DO CONTADOR ---
+        const dataCasamento = new Date("Sep 20, 2026 19:00:00").getTime();
+        setInterval(function () {
+            const agora = new Date().getTime();
+            const distancia = dataCasamento - agora;
+            const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("contador").innerHTML = `Faltam: ${dias}d ${horas}h ${minutos}m`;
+        }, 1000);
+
+        // --- SCRIPT DO CARROSSEL INFINITO ---
+        const carouselSlide = document.querySelector('.carousel-slide');
+        const carouselImages = document.querySelectorAll('.carousel-slide img');
+        const prevBtn = document.querySelector('#prevBtn');
+        const nextBtn = document.querySelector('#nextBtn');
+
+        let counter = 1;
+
+        if (carouselImages.length > 0) {
+            // Clona a primeira e a última imagem para criar o loop
+            const firstClone = carouselImages[0].cloneNode(true);
+            const lastClone = carouselImages[carouselImages.length - 1].cloneNode(true);
+            
+            firstClone.id = 'first-clone';
+            lastClone.id = 'last-clone';
+            
+            carouselSlide.append(firstClone);
+            carouselSlide.prepend(lastClone);
+
+            const allImages = document.querySelectorAll('.carousel-slide img');
+            const size = carouselSlide.clientWidth;
+
+            // Começa na primeira imagem real
+            carouselSlide.style.transform = 'translateX(' + (-size * counter) + 'px)';
+
+            nextBtn.addEventListener('click', () => {
+                if (counter >= allImages.length - 1) return;
+                carouselSlide.style.transition = "transform 0.5s ease-in-out";
+                counter++;
+                carouselSlide.style.transform = 'translateX(' + (-size * counter) + 'px)';
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (counter <= 0) return;
+                carouselSlide.style.transition = "transform 0.5s ease-in-out";
+                counter--;
+                carouselSlide.style.transform = 'translateX(' + (-size * counter) + 'px)';
+            });
+
+            carouselSlide.addEventListener('transitionend', () => {
+                // Loop invisível quando chega nos clones
+                if (allImages[counter].id === 'first-clone') {
+                    carouselSlide.style.transition = "none";
+                    counter = 1;
+                    carouselSlide.style.transform = 'translateX(' + (-size * counter) + 'px)';
+                }
+                if (allImages[counter].id === 'last-clone') {
+                    carouselSlide.style.transition = "none";
+                    counter = allImages.length - 2;
+                    carouselSlide.style.transform = 'translateX(' + (-size * counter) + 'px)';
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                const newSize = carouselSlide.clientWidth;
+                carouselSlide.style.transition = "none";
+                carouselSlide.style.transform = 'translateX(' + (-newSize * counter) + 'px)';
+            });
+        }
+    </script>
+</body>
+</html>
