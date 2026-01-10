@@ -71,12 +71,27 @@
             transition: all 0.3s ease; 
         }
 
+        /* --- EFEITO HOVER (Passar o Mouse) --- */
+        .nav-links a:hover {
+            color: var(--cor-primaria);
+            transform: scale(1.1); /* Aumenta um pouquinho */
+            text-shadow: 0px 0px 1px var(--cor-primaria);
+        }
+
         .btn-rsvp-nav { 
             background-color: var(--cor-primaria); 
             color: white !important; 
             padding: 8px 15px; 
             border-radius: 5px; 
             font-size: 0.8rem !important;
+            transition: all 0.3s ease; /* Suavidade na animação */
+        }
+
+        /* Efeito Hover no Botão */
+        .btn-rsvp-nav:hover {
+            background-color: #500014; /* Fica mais escuro */
+            transform: scale(1.05); /* Cresce */
+            box-shadow: 0 4px 10px rgba(128, 0, 32, 0.4); /* Sombra */
         }
 
         /* --- HERO (Topo) --- */
@@ -172,25 +187,37 @@
         .carousel-slide img { width: 100%; height: 100%; flex-shrink: 0; object-fit: cover; object-position: center top; }
         .botoes-carrossel { display: flex; justify-content: center; gap: 40px; margin-top: 15px; }
         .carousel-btn { background: none; border: none; cursor: pointer; padding: 5px; }
-        .carousel-btn svg { fill: var(--cor-primaria); width: 35px; height: 35px; }
+        .carousel-btn svg { fill: var(--cor-primaria); width: 35px; height: 35px; transition: transform 0.3s; }
+        .carousel-btn:hover svg { transform: scale(1.2); }
 
         /* --- INFO E RSVP --- */
         .texto-destaque-jantar { font-size: 1.6rem; color: var(--cor-primaria); font-weight: bold; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto; }
         .info-box { background: #fff; padding: 30px; border: 2px solid var(--cor-primaria); border-radius: 10px; max-width: 700px; margin: 0 auto; box-shadow: 0 10px 25px rgba(128,0,32,0.1); }
         .preco-destaque { font-size: 1.6rem; color: var(--cor-primaria); font-weight: bold; display: block; margin: 15px 0; }
-
+        .preco-crianca  { font-size: 1.2rem; color: var(--cor-primaria); font-weight: bold; display: block; margin: 15px 0; }
         #rsvp { background: linear-gradient(135deg, var(--cor-primaria), #800000); color: white; padding: 60px 0; }
         #rsvp h2 { color: white; }
         .form-container { background: #fff; padding: 30px; border-radius: 10px; max-width: 600px; margin: auto; color: #333; box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
         .form-group { margin-bottom: 15px; text-align: left; }
         .form-group label { display: block; font-weight: bold; color: var(--cor-primaria); margin-bottom: 5px; font-size: 0.95rem; }
         input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; font-family: inherit; }
-        .btn { background-color: var(--cor-primaria); color: white; padding: 12px; border: none; width: 100%; font-size: 1rem; border-radius: 5px; cursor: pointer; margin-top: 10px; font-weight: bold; }
+        .btn { background-color: var(--cor-primaria); color: white; padding: 12px; border: none; width: 100%; font-size: 1rem; border-radius: 5px; cursor: pointer; margin-top: 10px; font-weight: bold; transition: 0.3s; }
+        .btn:hover { background-color: #500014; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
         footer { background: #222; color: #ccc; padding: 30px 0 60px 0; text-align: center; font-size: 0.9rem; }
 
-        /* --- INTEGRAÇÃO MOBILE (CORREÇÃO DE PROPORÇÃO) --- */
+        /* --- ANIMAÇÃO DO PIX (NOVA) --- */
+        @keyframes girarPix {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .pix-animado {
+            animation: girarPix 3s linear infinite; /* Roda a cada 3 segundos */
+            transform-origin: center;
+            display: block;
+        }
+
+        /* --- INTEGRAÇÃO MOBILE --- */
         @media (max-width: 768px) {
-            /* Navbar */
             header { padding: 0.5rem 0; }
             .navbar { flex-direction: column; gap: 5px; }
             .logo { font-size: 1.6rem; margin-bottom: 5px; }
@@ -198,29 +225,24 @@
             .nav-links a { margin: 0; font-size: 0.75rem; padding: 5px 8px; }
             .btn-rsvp-nav { padding: 6px 12px; }
             
-            /* Hero */
             #hero { height: auto; min-height: 80vh; padding: 60px 15px; }
             .hero-content h1 { font-size: 2.8rem; }
             .hero-content p { font-size: 1rem; padding: 0 10px; }
             #contador { font-size: 1rem; padding: 8px 20px; margin-top: 10px; width: auto; }
 
-            /* Seções Gerais */
             .section { padding: 40px 0; }
             .container { padding: 0 15px; }
 
-            /* História */
             .historia-container { flex-direction: column; gap: 20px; }
             .citacao { margin: 15px 0; font-size: 0.95rem; }
 
-            /* --- CORREÇÃO DO CARROSSEL NO CELULAR --- */
+            /* CARROSSEL MOBILE - Mantendo a proporção vertical */
             .carousel-container { 
-                width: 90%; /* Usa quase toda a largura */
+                width: 90%; 
                 max-width: 400px; 
-                /* AQUI ESTÁ O SEGREDO: Altura maior para proporção retrato, igual ao PC */
                 height: 450px; 
             } 
             
-            /* Restante dos ajustes */
             h2 { font-size: 2rem; margin-bottom: 15px; }
             .texto-destaque-jantar { font-size: 1.2rem; margin-bottom: 20px; }
             .info-box { padding: 20px; }
@@ -254,7 +276,7 @@
 
         <div class="hero-content container">
             <h1>Yudi & Ana</h1>
-            <p>Vamos celebrar o nosso amor!</p>
+            <p>Venha celebrar o nosso amor!</p>
             <p>11 de Setembro de 2026</p>
             <div id="contador">Calculando...</div>
         </div>
@@ -268,7 +290,7 @@
             <div class="historia-texto">
                 <h2>Como tudo começou...</h2>
                 <div class="citacao">
-                    "Meus olhos já a seguiam antes mesmo das nossas palavras se cruzarem. Bastou um empurrão para a gente se falar e, desde aquele dia, meu coração encontrou um novo ritmo." -Yudi
+                    "Meus olhos já a seguiam antes mesmo das nossas palavras se cruzarem. Bastou um empurrão para a gente se falar e, desde aquele dia, meu coração encontrou um novo ritmo,uma nova sintonia,acho cor e sabores ,achou meu grande amor." -Yudi
                 </div>
                 <div class="citacao">
                     "Ele me chamou atenção e comecei a prestar mais atenção nele e (com uma ajudinha da minha irmã) nos conhecemos. Não demorou muito pra eu perceber a pessoa incrível que o Yudi é." -Ana
@@ -303,12 +325,13 @@
     <section id="informacoes" class="section text-center">
         <div class="container">
             <h2>Jantar de Celebração</h2>
-            <p class="texto-destaque-jantar">Optamos por um formato intimista e moderno: o casamento por adesão.</p>
+            <p class="texto-destaque-jantar">Optamos por um formato intimista e moderno: <br>O casamento por adesão.</p>
             <div class="info-box">
                 <h3>Informações Importantes</h3>
-                <p>Local: <strong>Restaurante [Nome]</strong></p>
-                <p>Endereço: [Rua Tal, 123]</p>
+                <p>Local: <strong>Restaurante Ochalé - Culinária, Melodia e Celebração</strong></p>
+                <p>Endereço: Tv. We Cinqüenta e Seis, 962 - Coqueiro, Ananindeua - PA, 67133-390</p>
                 <span class="preco-destaque">Valor da Adesão: R$ 140,00 por pessoa</span>
+                <span class="preco-crianca">Criança até X anos pagam R$ 70,00 por pessoa</span>
                 <ul style="list-style: none;">
                     <li>🍽️ Buffet completo</li>
                     <li>🥤 Bebidas não alcoólicas</li>
@@ -317,11 +340,30 @@
                 <p><small>*Bebidas alcoólicas à parte.*</small></p>
             </div>
             
-            <p style="margin-top: 40px;">
-                A presença de vocês é o nosso maior presente. Como o jantar é por adesão, não será necessário nenhum outro presente (mas se quiserem nos abençoar ficaremos felizes 😃).
-                <br>
-                PIX: (91) 98728-3898 🦍
-            </p>
+            <div style="margin-top: 40px; text-align: center;">
+                <p>
+                    A presença de vocês é o nosso maior presente. Como o jantar é por adesão, não será necessário nenhum outro presente.<br> (mas se quiserem nos abençoar ficaremos felizes 😃).
+                </p>
+                
+                <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin: 15px 0;">
+                    <svg class="pix-animado" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <g transform="rotate(45 12 12)">
+                            <rect x="2" y="2" width="9" height="9" rx="3" fill="#32BCAD" />
+                            <rect x="13" y="2" width="9" height="9" rx="3" fill="#32BCAD" />
+                            <rect x="2" y="13" width="9" height="9" rx="3" fill="#32BCAD" />
+                            <rect x="13" y="13" width="9" height="9" rx="3" fill="#32BCAD" />
+                        </g>
+                    </svg>
+                    
+                    <span style="font-weight: bold; font-size: 1.1rem; color: #333;">
+                        PIX: (91)98077-5555 🦍
+                    </span>
+                </div>
+                
+                <p>
+                    Ansiosos para celebrar com você! Para garantir o seu lugar, por favor, envie o comprovante. O prazo para o pagamento é até o dia 11.
+                </p>
+            </div>
         </div>
     </section>
 
@@ -335,7 +377,7 @@
                     
                     <div class="form-group">
                         <label>Nome Completo</label>
-                        <input type="text" name="nome" required placeholder="Ex: Yudi Tamashiro">
+                        <input type="text" name="nome" required placeholder="Ex: Ana Sato">
                     </div>
 
                     <div class="form-group">
@@ -353,7 +395,7 @@
                     </div>
                     <div class="form-group">
                         <label>Acompanhantes</label>
-                        <textarea name="acompanhantes" rows="3" placeholder="Nome de quem vai com você"></textarea>
+                        <textarea name="acompanhantes" rows="3" placeholder="Nome dos acompanhantes"></textarea>
                     </div>
                     <button type="submit" class="btn">ENVIAR CONFIRMAÇÃO</button>
                 </form>
@@ -405,7 +447,7 @@
                 carouselSlide.style.transition = "transform 0.5s ease-in-out";
                 counter++;
                 carouselSlide.style.transform = 'translateX(' + (-size * counter) + 'px)';
-            });
+            }); 
 
             prevBtn.addEventListener('click', () => {
                 if (counter <= 0) return;
