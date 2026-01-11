@@ -194,7 +194,7 @@
         .texto-destaque-jantar { font-size: 1.6rem; color: var(--cor-primaria); font-weight: bold; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto; }
         .info-box { background: #fff; padding: 30px; border: 2px solid var(--cor-primaria); border-radius: 10px; max-width: 700px; margin: 0 auto; box-shadow: 0 10px 25px rgba(128,0,32,0.1); }
         .preco-destaque { font-size: 1.6rem; color: var(--cor-primaria); font-weight: bold; display: block; margin: 15px 0; }
-        .preco-crianca  { font-size: 1.0rem; color: var(--cor-primaria); font-weight: bold; display: block; margin: 15px 0; }
+        .preco-crianca  { font-size: 1.2rem; color: var(--cor-primaria); font-weight: bold; display: block; margin: 15px 0; }
         #rsvp { background: linear-gradient(135deg, var(--cor-primaria), #800000); color: white; padding: 60px 0; }
         #rsvp h2 { color: white; }
         .form-container { background: #fff; padding: 30px; border-radius: 10px; max-width: 600px; margin: auto; color: #333; box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
@@ -205,7 +205,7 @@
         .btn:hover { background-color: #500014; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
         footer { background: #222; color: #ccc; padding: 30px 0 60px 0; text-align: center; font-size: 0.9rem; }
 
-        /* --- ANIMAÇÃO DO PIX (NOVA) --- */
+        /* --- ANIMAÇÃO DO PIX --- */
         @keyframes girarPix {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -216,12 +216,12 @@
             display: block;
         }
 
-        /* --- INTEGRAÇÃO MOBILE --- */
+        /* --- INTEGRAÇÃO MOBILE MELHORADA --- */
         @media (max-width: 768px) {
             header { padding: 0.5rem 0; }
             .navbar { flex-direction: column; gap: 5px; }
             .logo { font-size: 1.6rem; margin-bottom: 5px; }
-            .nav-links { gap: 8px; justify-content: center; flex-wrap: wrap; }
+            .nav-links { gap: 10px; justify-content: center; flex-wrap: wrap; }
             .nav-links a { margin: 0; font-size: 0.75rem; padding: 5px 8px; }
             .btn-rsvp-nav { padding: 6px 12px; }
             
@@ -231,22 +231,38 @@
             #contador { font-size: 1rem; padding: 8px 20px; margin-top: 10px; width: auto; }
 
             .section { padding: 40px 0; }
-            .container { padding: 0 15px; }
+            .container { padding: 0 20px; } /* Mais margem nas laterais */
 
             .historia-container { flex-direction: column; gap: 20px; }
-            .citacao { margin: 15px 0; font-size: 0.95rem; }
+            .citacao { margin: 15px 0; font-size: 0.95rem; text-align: center; } /* Citação centralizada */
 
-            /* CARROSSEL MOBILE - Mantendo a proporção vertical */
+            /* CARROSSEL MOBILE */
             .carousel-container { 
-                width: 90%; 
-                max-width: 400px; 
-                height: 450px; 
+                width: 100%; 
+                max-width: 350px; 
+                height: 400px; 
             } 
             
             h2 { font-size: 2rem; margin-bottom: 15px; }
-            .texto-destaque-jantar { font-size: 1.2rem; margin-bottom: 20px; }
-            .info-box { padding: 20px; }
-            .preco-destaque { font-size: 1.4rem; }
+            
+            /* JANTAR MOBILE - Otimização Visual */
+            .texto-destaque-jantar { font-size: 1.15rem; margin-bottom: 25px; line-height: 1.4; }
+            
+            .info-box { 
+                padding: 25px 15px; 
+                width: 100%;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.08); /* Sombra mais suave */
+                border-width: 1px;
+            }
+            
+            .preco-destaque { font-size: 1.3rem; margin: 10px 0; }
+            .preco-crianca { font-size: 1rem; }
+            
+            .pix-container-mobile {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
             .form-container { padding: 20px; }
         }
     </style>
@@ -326,27 +342,33 @@
         <div class="container">
             <h2>Jantar de Celebração</h2>
             <p class="texto-destaque-jantar">Optamos por um formato intimista e moderno: <br>O casamento por adesão.</p>
+            
             <div class="info-box">
                 <h3>Informações Importantes</h3>
-                <p>Local:Restaurante Ochalé - Culinária, Melodia e Celebração</p>
+                <p style="margin-top: 10px;">Local: <strong>Restaurante Ochalé - Culinária, Melodia e Celebração</strong></p>
                 <p>Endereço: Tv. We Cinqüenta e Seis, 962 - Coqueiro, Ananindeua - PA, 67133-390</p>
-                <span class="preco-destaque">Valor da Adesão: R$ 140,00 por pessoa</span>
-                <span class="preco-crianca">Criança até X anos pagam R$ 70,00 por pessoa</span>
-                <ul style="list-style: none;">
-                    <li>🍽️ Buffet completo</li>
+                
+                <div style="margin: 20px 0; border-top: 1px dashed #ddd; border-bottom: 1px dashed #ddd; padding: 15px 0;">
+                    <span class="preco-destaque">Valor da Adesão: R$ 140,00 por pessoa</span>
+                    <span class="preco-crianca">Criança até X anos pagam R$ 70,00 por pessoa</span>
+                </div>
+
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 5px;">🍽️ Buffet completo</li>
                     <li>🥤 Bebidas não alcoólicas</li>
                 </ul>
                 <br>
-                <p><small>*Bebidas alcoólicas à parte.*</small></p>
+                <p><small style="color: #666;">*Bebidas alcoólicas à parte.*</small></p>
             </div>
             
-            <div style="margin-top: 40px; text-align: center;">
+            <div class="texto-final-jantar" style="margin-top: 40px; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
                 <p>
-                    A presença de vocês é o nosso maior presente. Como o jantar é por adesão, não será necessário nenhum outro presente.<br> (mas se quiserem nos abençoar ficaremos felizes 😃).
+                    A presença de vocês é o nosso maior presente. Como o jantar é por adesão, não será necessário nenhum outro presente.<br> 
+                    (mas se quiserem nos abençoar ficaremos felizes 😃).
                 </p>
                 
-                <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin: 15px 0;">
-                    <svg class="pix-animado" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin: 25px 0; flex-wrap: wrap;">
+                    <svg class="pix-animado" width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <g transform="rotate(45 12 12)">
                             <rect x="2" y="2" width="9" height="9" rx="3" fill="#32BCAD" />
                             <rect x="13" y="2" width="9" height="9" rx="3" fill="#32BCAD" />
@@ -355,12 +377,12 @@
                         </g>
                     </svg>
                     
-                    <span style="font-weight: bold; font-size: 1.1rem; color: #333;">
+                    <span style="font-weight: bold; font-size: 1.2rem; color: #333; letter-spacing: 0.5px;">
                         PIX: (91)98077-5555 🦍
                     </span>
                 </div>
                 
-                <p>
+                <p style="font-weight: 500;">
                     Ansiosos para celebrar com você! Para garantir o seu lugar, por favor, envie o comprovante. O prazo para o pagamento é até o dia 11.
                 </p>
             </div>
@@ -478,9 +500,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
